@@ -32,11 +32,14 @@ public class OfficialAdapter extends RecyclerView.Adapter<OfficialViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull OfficialViewHolder holder, int position) {
+        Official official = officialList.get(position);
 
+        holder.office_name.setText(official.getOffice());
+        holder.name_and_party.setText(official.getName() + " (" + official.getParty()+ ")");
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return officialList.size();
     }
 }

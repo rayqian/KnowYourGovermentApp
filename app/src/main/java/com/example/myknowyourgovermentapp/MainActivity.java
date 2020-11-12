@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -26,6 +27,23 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        recyclerView = findViewById(R.id.recycler);
+        myAdapter = new OfficialAdapter(officialList, this);
+        recyclerView.setAdapter(myAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        officialList.clear();
+        //reading json file in onCreate
+        //readJSONData();
+        //add dummy data
+        Official a = new Official("president", "Obama", "Dom");
+        Official b = new Official("vice president", "Baiden", "Dom");
+        officialList.add(a);
+        officialList.add(b);
+
     }
 
     @Override

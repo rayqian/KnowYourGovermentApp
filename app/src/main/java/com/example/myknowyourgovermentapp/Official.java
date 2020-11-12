@@ -21,4 +21,48 @@ public class Official implements Serializable {
         this.name = name;
         this.party = party;
     }
+
+    public String getOffice() {
+        return office;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getParty() {
+        return party;
+    }
+
+    public String getPhoto_url() {
+        return photo_url;
+    }
+
+    public String getOffice_address() {
+        return office_address;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getWebsite() {
+        return Website;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public String getYoutube() {
+        return youtube;
+    }
 }
