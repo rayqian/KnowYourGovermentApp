@@ -1,12 +1,17 @@
 package com.example.myknowyourgovermentapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,15 +61,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_search:
-//                handleSearchLocate();
+                handleSearchLocate();
                 return true;
             case R.id.menu_about:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     @Override
     public void onClick(View view) {
@@ -72,8 +78,44 @@ public class MainActivity extends AppCompatActivity
         Official official = officialList.get(pos);
 //        String pre_url = "http://www.marketwatch.com/investing/stock/";
 //        String url = pre_url + stock.getStockSymbol();
-        Intent i = new Intent(Intent.ACTION_VIEW);
+//        Intent i = new Intent(Intent.ACTION_VIEW);
 //        i.setData(Uri.parse(url));
-        startActivity(i);
+//        startActivity(i);
+        Toast.makeText(this, "toast from onClick method for " + official.getName(), Toast.LENGTH_SHORT ).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Bye, Thanks for using my app!", Toast.LENGTH_SHORT).show();
+        super.onBackPressed();
+    }
+
+    public void handleSearchLocate(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText et = new EditText(this);
+
+        et.setGravity(Gravity.CENTER_HORIZONTAL);
+
+        builder.setView(et);
+
+        builder.setNegativeButton("CANCLE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String user_input = et.getText().toString();
+//                handleStockSearch(user_input);
+
+            }
+        });
+
+        builder.setTitle("Enter a City, State or a Zip Code:");
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
