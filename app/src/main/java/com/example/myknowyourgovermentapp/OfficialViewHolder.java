@@ -13,7 +13,7 @@ public class OfficialViewHolder extends RecyclerView.ViewHolder{
 
     public OfficialViewHolder(@NonNull View itemView) {
         super(itemView);
-        office_name = itemView.findViewById(R.id.office);
+        office_name = itemView.findViewById(R.id.officeField);
         name_and_party = itemView.findViewById(R.id.name_with_party);
     }
 }

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/officeField"
+        android:layout_width="180dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nameField"
+        android:layout_width="249dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="28dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/officeField" />
+
+    <TextView
+        android:id="@+id/partyField"
+        android:layout_width="159dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameField" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="230dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/partyField"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="40dp"
+            android:text="Address: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/address_info" />
+
+        <TextView
+            android:id="@+id/address_info"
+            android:layout_width="202dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="76dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="71dp"
+            android:layout_height="22dp"
+            android:text="Phone:"
+            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="@+id/phone_info" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="71dp"
+            android:layout_height="22dp"
+            android:text="Email: "
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/email_info" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="71dp"
+            android:layout_height="22dp"
+            android:text="Website: "
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toTopOf="@+id/web_info" />
+
+        <TextView
+            android:id="@+id/phone_info"
+            android:layout_width="203dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="28dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/address_info"
+            app:layout_constraintTop_toBottomOf="@+id/address_info" />
+
+        <TextView
+            android:id="@+id/email_info"
+            android:layout_width="203dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="32dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/phone_info"
+            app:layout_constraintTop_toBottomOf="@+id/phone_info" />
+
+        <TextView
+            android:id="@+id/web_info"
+            android:layout_width="203dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="24dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/email_info"
+            app:layout_constraintTop_toBottomOf="@+id/email_info" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

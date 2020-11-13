@@ -124,6 +124,8 @@ public class MainActivity extends AppCompatActivity
 //        i.setData(Uri.parse(url));
 //        startActivity(i);
         Toast.makeText(this, "toast from onClick method for " + official.getName(), Toast.LENGTH_SHORT ).show();
+        Intent intent = new Intent(this, OfficialActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -192,10 +194,10 @@ public class MainActivity extends AppCompatActivity
             Geocoder geocoder = new Geocoder(this);
             try{
                 List<Address> adrs = geocoder.getFromLocation(currentLocation.getLatitude(), currentLocation.getLongitude(), 1);
-//                StringBuilder sb = new StringBuilder();
-//                Address adr = adrs.get(0);
-//                sb.append(adr.getLocality()).append(", ").append(adr.getAdminArea()).append(adr.get)
-                ((TextView) findViewById(R.id.location)).setText(adrs.get(0).getAddressLine(0));
+                StringBuilder sb = new StringBuilder();
+                Address adr = adrs.get(0);
+                sb.append(adr.getLocality()).append(", ").append(adr.getAdminArea()).append(" ").append(adr.getPostalCode());
+                ((TextView) findViewById(R.id.location)).setText(sb.toString());
             }catch (IOException e){
                 e.printStackTrace();
             }
