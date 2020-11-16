@@ -11,15 +11,54 @@ public class Official implements Serializable {
     private String office_address;
     private String phone_number;
     private String email;
-    private String Website;
+    private String website;
     private String facebook;
-    private String twitter;
     private String youtube;
+    private String twitter;
 
-    Official(String office, String name, String party){
+
+    public void setOffice(String office) {
         this.office = office;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public void setParty(String party) {
         this.party = party;
+    }
+
+    public void setPhoto_url(String photo_url) {
+        this.photo_url = photo_url;
+    }
+
+    public void setOffice_address(String office_address) {
+        this.office_address = office_address;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+    public void setYoutube(String youtube) {
+        this.youtube = youtube;
     }
 
     public String getOffice() {
@@ -51,7 +90,7 @@ public class Official implements Serializable {
     }
 
     public String getWebsite() {
-        return Website;
+        return website;
     }
 
     public String getFacebook() {

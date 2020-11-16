@@ -172,7 +172,21 @@ public class MainActivity extends AppCompatActivity
         new Thread(uor).start();
     }
 
-    //accept result from SearchStockRunnable
+    //accept location result from SearchStockRunnable
+    public void acceptLocResult(String location){
+
+        //if no result from runnable
+        if(location == null || location.equals("")){
+            ((TextView) findViewById(R.id.location)).setText("no location info");
+        }
+
+        //if there are results from runnable
+        else{
+            ((TextView) findViewById(R.id.location)).setText(location);
+        }
+    }
+
+    //accept officials result from SearchStockRunnable
     public void acceptResult(ArrayList<Official> officials){
         officialList.clear();
         //if no result from runnable
