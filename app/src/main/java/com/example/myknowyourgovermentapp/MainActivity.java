@@ -62,15 +62,9 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         officialList.clear();
-        //reading json file in onCreate
-        //readJSONData();
-        //add dummy data
-//        Official a = new Official("president", "Obama", "Dom");
-//        Official b = new Official("vice president", "Baiden", "Dom");
-//        officialList.add(a);
-//        officialList.add(b);
 
         //location code
+        String postal_code = "";
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         criteria = new Criteria();
 
@@ -88,8 +82,15 @@ public class MainActivity extends AppCompatActivity
                     },
                     MY_LOCATION_REQUEST_CODE_ID);
         } else {
-            setLocation();
+            postal_code = setLocation();
         }
+
+        //reading json file in onCreate
+        //readJSONData();
+        //add dummy data
+        UpdateOfficialRunnable uor = new UpdateOfficialRunnable(this, postal_code);
+        new Thread(uor).start();
+
 
     }
 
@@ -203,12 +204,14 @@ public class MainActivity extends AppCompatActivity
             officialList.addAll(officials);
             //the official list should show up automatically
             //handleResultShow();
+            myAdapter.notifyDataSetChanged();
         }
+        Toast.makeText(this, "result received " + officials.size() + " officials", Toast.LENGTH_SHORT).show();
 
     }
 
     public void downloadFailed() {
-        officialList.clear();
+        Toast.makeText(this, "no result received", Toast.LENGTH_SHORT).show();
     }
 
 //    public void handleResultShow(){
@@ -257,7 +260,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @SuppressLint("MissingPermission")
-    private void setLocation() {
+    private String setLocation() {
         //best provider: gps, network or passive
         String bestProvider = locationManager.getBestProvider(criteria, true);
 //        ((TextView) findViewById(R.id.location)).setText(bestProvider);
@@ -274,15 +277,13 @@ public class MainActivity extends AppCompatActivity
                 Address adr = adrs.get(0);
                 sb.append(adr.getLocality()).append(", ").append(adr.getAdminArea()).append(" ").append(adr.getPostalCode());
                 ((TextView) findViewById(R.id.location)).setText(sb.toString());
+                return adr.getPostalCode();
             }catch (IOException e){
                 e.printStackTrace();
             }
         } else {
             ((TextView) findViewById(R.id.location)).setText("Location Unavailable");
         }
-
-
-
-
+        return "";
     }
 }

@@ -85,9 +85,9 @@ public class UpdateOfficialRunnable implements Runnable {
                 if(location != null){
                     mainActivity.acceptLocResult(location);
                 }
-//                if (officialList != null){
-//                    mainActivity.acceptResult(officialList);
-//                }
+                if (officialList != null){
+                    mainActivity.acceptResult(officialList);
+                }
             }
         });
 
@@ -133,20 +133,23 @@ public class UpdateOfficialRunnable implements Runnable {
 
 
                 StringBuilder address = new StringBuilder();
-                JSONObject jAddress = (JSONObject) jOfficial.getJSONArray("address").get(0);
-                if(jAddress.has("line1")){
-                    address.append(jAddress.get("line1")).append(" ");
+                if(jOfficial.has("address")){
+                    JSONObject jAddress = (JSONObject) jOfficial.getJSONArray("address").get(0);
+                    if(jAddress.has("line1")){
+                        address.append(jAddress.get("line1")).append(" ");
+                    }
+                    if(jAddress.has("city")){
+                        address.append(jAddress.get("city")).append(", ");
+                    }
+                    if(jAddress.has("state")){
+                        address.append(jAddress.get("state")).append(" ");
+                    }
+                    if(jAddress.has("zip")){
+                        address.append(jAddress.get("zip"));
+                    }
+                    temp.setOffice_address(address.toString());
                 }
-                if(jAddress.has("city")){
-                    address.append(jAddress.get("city")).append(", ");
-                }
-                if(jAddress.has("state")){
-                    address.append(jAddress.get("state")).append(" ");
-                }
-                if(jAddress.has("zip")){
-                    address.append(jAddress.get("zip"));
-                }
-                temp.setOffice_address(address.toString());
+
                 if(jOfficial.has("channels")){
                     JSONArray jChannels = jOfficial.getJSONArray("channels");
                     for(int j = 0; j < jChannels.length(); j++){
