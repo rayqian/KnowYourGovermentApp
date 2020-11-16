@@ -10,7 +10,6 @@ import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -28,13 +27,14 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
+
+//API_KEY = AIzaSyBadkTYHFTAZFronpXiIIDvnVYlisGzXcM
 
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener{
@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity
         //reading json file in onCreate
         //readJSONData();
         //add dummy data
-        Official a = new Official("president", "Obama", "Dom");
-        Official b = new Official("vice president", "Baiden", "Dom");
-        officialList.add(a);
-        officialList.add(b);
+//        Official a = new Official("president", "Obama", "Dom");
+//        Official b = new Official("vice president", "Baiden", "Dom");
+//        officialList.add(a);
+//        officialList.add(b);
 
         //location code
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity
 //        startActivity(i);
         Toast.makeText(this, "toast from onClick method for " + official.getName(), Toast.LENGTH_SHORT ).show();
         Intent intent = new Intent(this, OfficialActivity.class);
+        intent.putExtra(Official.class.getName(), official);
         startActivity(intent);
     }
 
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String user_input = et.getText().toString();
-//                handleStockSearch(user_input);
+                handleLocateSearch(user_input);
             }
         });
         builder.setTitle("Enter a City, State or a Zip Code:");
@@ -160,6 +161,67 @@ public class MainActivity extends AppCompatActivity
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void handleLocateSearch(String input){
+        if(input.isEmpty()){
+            return;
+        }
+
+        //create new thread to handle locate search
+        UpdateOfficialRunnable uor = new UpdateOfficialRunnable(this, input);
+        new Thread(uor).start();
+    }
+
+    //accept result from SearchStockRunnable
+    public void acceptResult(ArrayList<Official> officials){
+        officialList.clear();
+        //if no result from runnable
+        if(officials.size() == 0){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Officials Data for the location is not found.");
+            builder.setTitle("Data Not Found");
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+
+        //if there are results from runnable
+        else{
+            officialList.addAll(officials);
+            //the official list should show up automatically
+            //handleResultShow();
+        }
+
+    }
+
+    public void downloadFailed() {
+        officialList.clear();
+    }
+
+//    public void handleResultShow(){
+//        Toast.makeText(this, "handle result received " + officialList.size() + " officials", Toast.LENGTH_SHORT).show();
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Make a selection");
+//
+//        //create the String[] to display the search result to user
+//        final CharSequence[] sArray = new CharSequence[searchResult.size()];
+//        for (int i = 0; i < searchResult.size(); i++){
+//            sArray[i] = searchResult.get(i).getSymbolwithName();
+//        }
+//        builder.setItems(sArray, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                //add the selection stock to main page
+//                validateAdd(searchResult.get(which));
+//                updatePrice();
+//            }
+//        });
+//
+//        builder.setNegativeButton("Nevermind", null);
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//
+//    }
 
     @Override
     public void onRequestPermissionsResult(
