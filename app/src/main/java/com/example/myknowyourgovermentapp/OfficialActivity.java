@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.text.util.Linkify;
+import android.widget.Toast;
+
 import androidx.annotation.ContentView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,6 +46,7 @@ public class OfficialActivity extends AppCompatActivity {
     private ImageButton youtube_button;
     private String youtube;
 
+    private Official of;//used for onClick photo activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +55,7 @@ public class OfficialActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent.hasExtra(Official.class.getName())){
             final Official o = (Official) intent.getSerializableExtra(Official.class.getName());
+            of = o;//used for another activity
             if (o == null)
                 return;
             //set location widget
@@ -242,8 +247,14 @@ public class OfficialActivity extends AppCompatActivity {
 
     //onClick method for photo
     public void clickPhoto(View v) {
-        Intent intent = new Intent(this, AboutActivity.class);
-        startActivity(intent);
+        if(of.getPhoto_url() != null){
+            Intent intent = new Intent(this, PhotoActivity.class);
+            intent.putExtra(Official.class.getName(), of);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(this, "no photo activity if photo is null", Toast.LENGTH_SHORT ).show();
+        }
     }
 
 }
