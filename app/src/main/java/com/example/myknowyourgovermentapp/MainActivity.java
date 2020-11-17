@@ -11,8 +11,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.JsonWriter;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,14 +28,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +62,6 @@ public class MainActivity extends AppCompatActivity
         myAdapter = new OfficialAdapter(officialList, this);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 //        officialList.clear();
 
         //location code
