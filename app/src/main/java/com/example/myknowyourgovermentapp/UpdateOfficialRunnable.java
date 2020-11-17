@@ -56,7 +56,6 @@ public class UpdateOfficialRunnable implements Runnable {
                 sb.append(line).append('\n');
             }
 
-            Log.d(TAG, "run: " + sb.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
