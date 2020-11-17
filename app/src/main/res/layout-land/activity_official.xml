@@ -25,40 +25,40 @@
             android:id="@+id/officeField"
             android:layout_width="327dp"
             android:layout_height="38dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintEnd_toStartOf="@+id/partyField"
+            app:layout_constraintHorizontal_bias="0.295"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/location2" />
 
         <TextView
             android:id="@+id/nameField"
-            android:layout_width="333dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="323dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="8dp"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/officeField"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/officeField"
             app:layout_constraintTop_toBottomOf="@+id/officeField" />
 
         <TextView
             android:id="@+id/partyField"
-            android:layout_width="335dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="300dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nameField" />
+            app:layout_constraintTop_toTopOf="@+id/officeField" />
 
         <ImageButton
             android:id="@+id/imagePhoto"
@@ -66,20 +66,21 @@
             android:layout_height="364dp"
             android:layout_marginTop="16dp"
             android:background="#000000"
+            android:contentDescription="@string/todo"
             android:onClick="clickPhoto"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.698"
+            app:layout_constraintStart_toEndOf="@+id/address_info"
             app:layout_constraintTop_toBottomOf="@+id/partyField"
-            tools:srcCompat="@tools:sample/avatars"
-            android:contentDescription="@string/todo" />
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/address_title"
             android:layout_width="75dp"
             android:layout_height="25dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
             android:text="@string/address"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
@@ -88,16 +89,16 @@
 
         <TextView
             android:id="@+id/address_info"
-            android:layout_width="312dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="56dp"
+            android:layout_width="265dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="240dp"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.294"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/address_title"
-            app:layout_constraintTop_toBottomOf="@+id/imagePhoto" />
+            app:layout_constraintTop_toBottomOf="@+id/nameField"
+            app:layout_constraintVertical_bias="0.347" />
 
         <TextView
             android:id="@+id/phone_title"
@@ -128,37 +129,31 @@
 
         <TextView
             android:id="@+id/phone_info"
-            android:layout_width="319dp"
+            android:layout_width="253dp"
             android:layout_height="38dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.383"
             app:layout_constraintStart_toEndOf="@+id/phone_title"
             app:layout_constraintTop_toBottomOf="@+id/address_info" />
 
         <TextView
             android:id="@+id/email_info"
-            android:layout_width="319dp"
-            android:layout_height="50dp"
+            android:layout_width="274dp"
+            android:layout_height="29dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.28"
             app:layout_constraintStart_toEndOf="@+id/email_title"
             app:layout_constraintTop_toBottomOf="@+id/phone_info" />
 
         <TextView
             android:id="@+id/web_info"
-            android:layout_width="328dp"
-            android:layout_height="52dp"
+            android:layout_width="279dp"
+            android:layout_height="47dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toEndOf="@+id/website_title"
             app:layout_constraintTop_toBottomOf="@+id/email_info" />
 
@@ -207,16 +202,13 @@
             android:layout_width="99dp"
             android:layout_height="93dp"
             android:background="@null"
+            android:contentDescription="@string/todo"
             android:onClick="clickLogo"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/imagePhoto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imagePhoto"
-            app:layout_constraintVertical_bias="1.0"
-            tools:srcCompat="@tools:sample/avatars"
-            android:contentDescription="@string/todo" />
+            app:layout_constraintEnd_toEndOf="@+id/imagePhoto"
+            app:layout_constraintStart_toStartOf="@+id/imagePhoto"
+            tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
