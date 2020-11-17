@@ -77,12 +77,13 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/address_title"
             android:layout_width="75dp"
             android:layout_height="25dp"
             android:layout_marginStart="40dp"
             android:text="Address: "
             android:textColor="#FFFFFF"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/address_info" />
 
@@ -94,34 +95,35 @@
             android:layout_marginTop="40dp"
             android:text="TextView"
             android:textColor="#FFFFFF"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/address_title"
             app:layout_constraintTop_toBottomOf="@+id/imagePhoto" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/phone_title"
             android:layout_width="71dp"
             android:layout_height="22dp"
             android:text="Phone:"
             android:textColor="#FFFFFF"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintStart_toStartOf="@+id/address_title"
             app:layout_constraintTop_toTopOf="@+id/phone_info" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/email_title"
             android:layout_width="71dp"
             android:layout_height="22dp"
             android:text="Email: "
             android:textColor="#FFFFFF"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/phone_title"
             app:layout_constraintTop_toTopOf="@+id/email_info" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/website_title"
             android:layout_width="71dp"
             android:layout_height="22dp"
             android:text="Website: "
             android:textColor="#FFFFFF"
-            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintStart_toStartOf="@+id/email_title"
             app:layout_constraintTop_toTopOf="@+id/web_info" />
 
         <TextView
@@ -146,8 +148,8 @@
 
         <TextView
             android:id="@+id/web_info"
-            android:layout_width="203dp"
-            android:layout_height="31dp"
+            android:layout_width="211dp"
+            android:layout_height="51dp"
             android:layout_marginTop="24dp"
             android:text="TextView"
             android:textColor="#FFFFFF"
@@ -158,11 +160,13 @@
             android:id="@+id/facebook_button"
             android:layout_width="52dp"
             android:layout_height="45dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="40dp"
-            android:scaleType="fitCenter"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="64dp"
+            android:background="@null"
+            android:onClick="clickFacebook"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/website_title"
             app:srcCompat="@drawable/facebook" />
 
         <ImageButton
@@ -170,7 +174,9 @@
             android:layout_width="52dp"
             android:layout_height="45dp"
             android:layout_marginStart="40dp"
-            android:scaleType="fitCenter"
+            android:background="@null"
+            android:onClick="clickTwitter"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toEndOf="@+id/facebook_button"
             app:layout_constraintTop_toTopOf="@+id/facebook_button"
             app:srcCompat="@drawable/twitter" />
@@ -180,7 +186,9 @@
             android:layout_width="52dp"
             android:layout_height="45dp"
             android:layout_marginStart="40dp"
-            android:scaleType="fitCenter"
+            android:background="@null"
+            android:onClick="clickYouTube"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toEndOf="@+id/twitter_button"
             app:layout_constraintTop_toTopOf="@+id/twitter_button"
             app:srcCompat="@drawable/youtube" />
@@ -190,6 +198,7 @@
             android:layout_width="99dp"
             android:layout_height="93dp"
             android:background="@null"
+            android:onClick="clickLogo"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@+id/imagePhoto"
             app:layout_constraintEnd_toEndOf="parent"

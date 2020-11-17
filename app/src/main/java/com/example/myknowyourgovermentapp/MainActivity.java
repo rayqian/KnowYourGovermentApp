@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        officialList.clear();
+//        officialList.clear();
 
         //location code
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -89,22 +89,26 @@ public class MainActivity extends AppCompatActivity
                             Manifest.permission.ACCESS_FINE_LOCATION
                     },
                     MY_LOCATION_REQUEST_CODE_ID);
-        } else {
+        }
+        else{
             Address cur_add = setLocation();
-            String cur_post_code = cur_add.getPostalCode();
-            String cur_city = cur_add.getAdminArea();
+            StringBuilder sb = new StringBuilder();
+            String address;
+            if(cur_add.getPostalCode() == null){
+                sb.append(cur_add.getLocality()).append(", ").append(cur_add.getAdminArea()).append(" ");
+                address = cur_add.getLocality();;
+            }
+            else{
+                sb.append(cur_add.getLocality()).append(", ").append(cur_add.getAdminArea()).append(" ").append(cur_add.getPostalCode());
+                address = cur_add.getPostalCode();;
+            }
+            ((TextView)findViewById(R.id.location)).setText(sb.toString());
 
-            String address = cur_post_code != "" ? cur_post_code  : cur_city;
-            //reading json file in onCreate
-            //readJSONData();
             //loading data
             UpdateOfficialRunnable uor = new UpdateOfficialRunnable(this, address);
             new Thread(uor).start();
-        }
 
-
-
-//        readJSONData();
+    }
 
 
     }
@@ -243,7 +247,23 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == MY_LOCATION_REQUEST_CODE_ID) {
             if (permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION) &&
                     grantResults[0] == PERMISSION_GRANTED) {
-                setLocation();
+
+                Address cur_add = setLocation();
+                StringBuilder sb = new StringBuilder();
+                String address;
+                if(cur_add.getPostalCode() == null){
+                    sb.append(cur_add.getLocality()).append(", ").append(cur_add.getAdminArea()).append(" ");
+                    address = cur_add.getLocality();;
+                }
+                else{
+                    sb.append(cur_add.getLocality()).append(", ").append(cur_add.getAdminArea()).append(" ").append(cur_add.getPostalCode());
+                    address = cur_add.getPostalCode();;
+                }
+                ((TextView)findViewById(R.id.location)).setText(sb.toString());
+
+                //loading data
+                UpdateOfficialRunnable uor = new UpdateOfficialRunnable(this, address);
+                new Thread(uor).start();
                 return;
             }
         }
@@ -255,8 +275,6 @@ public class MainActivity extends AppCompatActivity
     private Address setLocation() {
         //best provider: gps, network or passive
         String bestProvider = locationManager.getBestProvider(criteria, true);
-//        ((TextView) findViewById(R.id.location)).setText(bestProvider);
-
         Location currentLocation = null;
         if (bestProvider != null) {
             currentLocation = locationManager.getLastKnownLocation(bestProvider);
@@ -265,10 +283,7 @@ public class MainActivity extends AppCompatActivity
             Geocoder geocoder = new Geocoder(this);
             try{
                 List<Address> adrs = geocoder.getFromLocation(currentLocation.getLatitude(), currentLocation.getLongitude(), 1);
-                StringBuilder sb = new StringBuilder();
                 Address adr = adrs.get(0);
-                sb.append(adr.getLocality()).append(", ").append(adr.getAdminArea()).append(" ").append(adr.getPostalCode());
-                ((TextView) findViewById(R.id.location)).setText(sb.toString());
                 return adr;
             }catch (IOException e){
                 e.printStackTrace();
@@ -279,87 +294,4 @@ public class MainActivity extends AppCompatActivity
         return null;
     }
 
-//    private void readJSONData() {
-//        try {
-//            FileInputStream fis = getApplicationContext().
-//                    openFileInput("OfficialData.json");
-//
-//            // Read string content from file
-//            byte[] data = new byte[fis.available()]; // this technique is good for small files
-//            int loaded = fis.read(data);
-//            Log.d(TAG, "readJSONData: Loaded " + loaded + " bytes");
-//            fis.close();
-//            String json = new String(data);
-//
-//            // Create JSON Array from string file content
-//            JSONArray noteArr = new JSONArray(json);
-//            for (int i = 0; i < noteArr.length(); i++) {
-//                JSONObject cObj = noteArr.getJSONObject(i);
-//
-//                String office = cObj.getString("office");
-//                String name = cObj.getString("name");
-//                String party = cObj.getString("party");
-//                String photo_url = cObj.getString("photo_url");
-//                String office_address = cObj.getString("office_address");
-//                String phone_number = cObj.getString("phone_number");
-//                String email = cObj.getString("email");
-//                String website = cObj.getString("website");
-//                String facebook = cObj.getString("facebook");
-//                String youtube = cObj.getString("youtube");
-//                String twitter = cObj.getString("twitter");
-//
-//                // Create Country and add to ArrayList
-//                Official o = new Official();
-//                o.setOffice(office);
-//                o.setName(name);
-//                o.setParty(party);
-//                o.setPhoto_url(photo_url);
-//                o.setOffice_address(office_address);
-//                o.setPhone_number(phone_number);
-//                o.setEmail(email);
-//                o.setWebsite(website);
-//                o.setFacebook(facebook);
-//                o.setYoutube(youtube);
-//                o.setTwitter(twitter);
-//
-//                officialList.add(o);
-//            }
-//            myAdapter.notifyDataSetChanged();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    private void writeJSONData() {
-//
-//        try {
-//            FileOutputStream fos = getApplicationContext().
-//                    openFileOutput("OfficialData.json", Context.MODE_PRIVATE);
-//
-//            JsonWriter writer = new JsonWriter(new OutputStreamWriter(fos, StandardCharsets.UTF_8));
-//            writer.setIndent("  ");
-//            writer.beginArray();
-//            for (Official  o: officialList) {
-//                writer.beginObject();
-//
-//                writer.name("office").value(o.getOffice());
-//                writer.name("name").value(o.getName());
-//                writer.name("party").value(o.getParty());
-//                writer.name("photo_url").value(o.getPhoto_url());
-//                writer.name("office_address").value(o.getOffice_address());
-//                writer.name("phone_number").value(o.getPhone_number());
-//                writer.name("email").value(o.getEmail());
-//                writer.name("website").value(o.getWebsite());
-//                writer.name("facebook").value(o.getFacebook());
-//                writer.name("youtube").value(o.getYoutube());
-//                writer.name("twitter").value(o.getTwitter());
-//                writer.endObject();
-//            }
-//            writer.endArray();
-//            writer.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Log.d(TAG, "writeJSONData: " + e.getMessage());
-//        }
-//    }
 }
