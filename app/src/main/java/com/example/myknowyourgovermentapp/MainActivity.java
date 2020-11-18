@@ -10,6 +10,8 @@ import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import android.view.Gravity;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity
         myAdapter = new OfficialAdapter(officialList, this);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        officialList.clear();
+        officialList.clear();
 
         //location code
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -99,9 +101,15 @@ public class MainActivity extends AppCompatActivity
             //loading data
             UpdateOfficialRunnable uor = new UpdateOfficialRunnable(this, address);
             new Thread(uor).start();
-
     }
-
+        if(!isNetworkAvailable()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Data cannot be accessed/loaded without Internet connections.");
+            builder.setTitle("No Network Connection");
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            return;
+        }
 
     }
 
@@ -180,10 +188,19 @@ public class MainActivity extends AppCompatActivity
         if(input.isEmpty()){
             return;
         }
-
+        //check network availability before run the new thread
+        if(!isNetworkAvailable()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Data cannot be accessed/loaded without Internet connections.");
+            builder.setTitle("No Network Connection");
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            return;
+        }
         //create new thread to handle locate search
         UpdateOfficialRunnable uor = new UpdateOfficialRunnable(this, input);
         new Thread(uor).start();
+
     }
 
     //accept location result from SearchStockRunnable
@@ -284,6 +301,22 @@ public class MainActivity extends AppCompatActivity
             ((TextView) findViewById(R.id.location)).setText("Location Unavailable");
         }
         return null;
+    }
+
+    private boolean isNetworkAvailable(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm == null) {
+            Toast.makeText(this, "No ConnectivityManager", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        //get the network info
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+        if (netInfo != null && netInfo.isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
