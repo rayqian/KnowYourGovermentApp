@@ -14,9 +14,11 @@
         <TextView
             android:id="@+id/location2"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:background="#FF6D00"
             android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,8 +81,7 @@
             android:id="@+id/address_title"
             android:layout_width="75dp"
             android:layout_height="25dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
             android:text="@string/address"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
@@ -91,14 +92,14 @@
             android:id="@+id/address_info"
             android:layout_width="265dp"
             android:layout_height="74dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:layout_marginBottom="240dp"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/address_title"
             app:layout_constraintTop_toBottomOf="@+id/nameField"
-            app:layout_constraintVertical_bias="0.347" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/phone_title"
